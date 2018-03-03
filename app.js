@@ -5,6 +5,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+var browserify = require('browserify-middleware');
 var index = require('./routes/index');
 var users = require('./routes/users');
 
@@ -21,6 +22,20 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+//app.get('/javascripts/bundle.js', browserify('./client/script.js'));
+
+if (app.get('env') == 'development') {
+  var browserSync = require('browser-sync');
+  var config = {
+    files: ["public/**/*.{js,css}", "client/*.js", "sass/**/*.scss", "views/**/*.hbs"],
+    logLevel: 'debug',
+    logSnippet: false,
+    reloadDelay: 3000,
+    reloadOnRestart: true
+  };
+  var bs = browserSync(config);
+  app.use(require('connect-browser-sync')(bs));
+}
 
 app.use('/', index);
 app.use('/users', users);
