@@ -1,11 +1,11 @@
+
+<!--
 <h1>{{title}}</h1>
 <p>Welcome to {{title}}</p>
 <p>
     <div class="rows" id="ItalyPar">
-        <div class="col-md-12">  <p id="contryName">Італія</p>
-            
-                <img src="images/italy.png" alt="Italy">
-            
+        <div class="col-md-12">  <p id="contryName">Італія</p>            
+                <img src="images/italy.png" alt="Italy">            
     <p>
         держава на півдні Європи, в Середземномор'ї. Займає Апеннінський півострів, Паданську рівнину, південні схили Альп, острови Сицилія, Сардинія тощо. На суходолі Італія межує з Францією на північному заході, зі Швейцарією й Австрією на півночі та Словенією на північному сході.         
     </p>
@@ -49,3 +49,16 @@
         </div>
     </div>
 </p>
+-->
+
+{{#each countries}}
+<div class="media">
+  <div class="media-left">
+    <img src="{{Image}}" alt="{{Name}}" class="media-object" style="width:200px; height:100px">
+  </div>
+  <div class="media-body">
+   <h4 class="media-heading">{{Name}}</h4> 
+   <p>{{Desc}}</p>
+  </div>
+</div>
+{{/each}}
