@@ -1,13 +1,29 @@
 var express = require('express');
 var router = express.Router();
-
+var Country = require('../models/country');
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
+
 /* GET countries page. */
 router.get('/countries', function(req, res, next) {
-    let countries = [{
+    Country.find(function(err, countries) {
+        if (err) return console.err(err);
+        res.render('countries', { title: 'Express2', countries: countries });
+    });
+
+    /* Country.find()
+         .then(function(countries) {
+             res.render('countries', { title: 'Express2', countries: countries });
+         })
+         .catch(next)
+         .error(console.error);*/
+});
+
+router.get("/setup-db", function(req, res) {
+
+    var countries = [{
             Name: "Італія",
             Desc: "держава на півдні Європи, в Середземномор'ї. Займає Апеннінський півострів, Паданську рівнину, південні схили Альп, острови Сицилія, Сардинія тощо. На суходолі Італія межує з Францією на північному заході, зі Швейцарією й Австрією на півночі та Словенією на північному сході.",
             Image: "images/italy.png"
@@ -38,7 +54,21 @@ router.get('/countries', function(req, res, next) {
             Image: "images/india.png"
         }
     ];
-    res.render('countries', { title: 'Express2', countries: countries });
+
+    Country.remove({}, function(err) {
+        if (err) {
+            console.error(err);
+        } else
+            Country.insertMany(countries, function(err, docs) {
+                if (err) {
+                    console.error(err);
+                } else
+                    console.log('Inserted ' + docs.length);
+            });
+    });
+    res.status(200).json({
+        message: "Okey",
+    });
 });
 /* GET prices page. */
 router.get('/prices', function(req, res, next) {
