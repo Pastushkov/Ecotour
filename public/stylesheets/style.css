@@ -6,16 +6,3 @@ body {
 a {
     color: #00B7FF;
 }
-
-#contryName {
-    text-align: center;
-    font-size: 50px;
-}
-
-#ItalyPar {
-    text-align: center;
-}
-
-#ItalyPar>div>p {
-    text-align: left;
-}

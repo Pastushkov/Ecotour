@@ -6,11 +6,12 @@ router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
 
+
 /* GET countries page. */
 router.get('/countries', function(req, res, next) {
     Country.find(function(err, countries) {
         if (err) return console.err(err);
-        res.render('countries', { title: 'Express2', countries: countries });
+        res.render('countries', { title: 'Країни', countries: countries });
     });
 
     /* Country.find()
@@ -58,19 +59,20 @@ router.get("/setup-db", function(req, res) {
     Country.remove({}, function(err) {
         if (err) {
             console.error(err);
-        } else
-        for (let i=0;i<=countries.length;i++){
-            Country.insert(countries[i], function(err, docs) {
-                if (err) {
-                    console.error(err);
-                } else
-                    console.log('Inserted ' + docs.length);
+        } else {
+
+            for (let i = 0; i < countries.length; i++) {
+                Country.create(countries[i], function(err, country) {
+                    if (err) console.error('Error: ' + err);
+                    else console.log();
+                });
             }
-            });
+        }
     });
     res.status(200).json({
         message: "Okey",
     });
+
 });
 /* GET prices page. */
 router.get('/prices', function(req, res, next) {
