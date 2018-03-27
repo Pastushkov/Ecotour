@@ -59,11 +59,13 @@ router.get("/setup-db", function(req, res) {
         if (err) {
             console.error(err);
         } else
-            Country.insertMany(countries, function(err, docs) {
+        for (let i=0;i<=countries.length;i++){
+            Country.insert(countries[i], function(err, docs) {
                 if (err) {
                     console.error(err);
                 } else
                     console.log('Inserted ' + docs.length);
+            }
             });
     });
     res.status(200).json({
