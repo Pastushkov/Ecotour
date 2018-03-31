@@ -11,7 +11,7 @@
 
 
 const mongoose = require('mongoose'),
-    Country = mongoose.model('School');
+    Country = mongoose.model('Country');
 
 module.exports = {
     all: function(req, res) {

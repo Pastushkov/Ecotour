@@ -13,9 +13,9 @@ var countryController = require('../controllers/countryController.js');
 //     });
 // });
 
-router.get('/schools', countryController.all);
+router.get('/countries', countryController.all);
 
-router.route('/school/:schoolId')
+router.route('/country/:countryId')
     .get(countryController.read)
     .put(countryController.update)
     .delete(countryController.delete);

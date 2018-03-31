@@ -1,33 +1,69 @@
 var express = require('express');
 var router = express.Router();
-var School = require('../models/school');
+var Country = require('../models/country');
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
 
-/* GET schools page. */
-router.get('/schools', function(req, res, next) {
-    res.render('schools', { title: 'Ajax Demo', layout: 'layout1' });    
+/* GET countries page. */
+router.get('/countries', function(req, res, next) {
+    res.render('countries', { title: 'Ajax Demo', layout: 'layout1' });
+    // Country.find(function(err, countries) {
+    //     if (err) return console.err(err);
+    //     res.render('countries', { title: 'Країни', countries: countries });
+
 });
+
+/* Country.find()
+     .then(function(countries) {
+         res.render('countries', { title: 'Express2', countries: countries });
+     })
+     .catch(next)
+     .error(console.error);*/
+//});
 
 router.get("/setup-db", function(req, res) {
 
-    var schools = [
+    var countries = [{
+            Name: "Італія",
+            Desc: "держава на півдні Європи, в Середземномор'ї. Займає Апеннінський півострів, Паданську рівнину, південні схили Альп, острови Сицилія, Сардинія тощо. На суходолі Італія межує з Францією на північному заході, зі Швейцарією й Австрією на півночі та Словенією на північному сході.",
+            Image: "images/italy.png"
+        },
         {
-            Name : "Спеціалізована ЗОШ № 1",
-            Adress: "вул. Польский ринок, 6",
-            Contacts: "(03849) 2-15-13"
+            Name: "Сполучені Штати Америки",
+            Desc: "конституційна федеративна республіка в Північній Америці, що складається з 50 штатів: Аляски, Гаваїв, 48 штатів на території між Атлантичним і Тихим океанами і між Канадою і Мексикою та федерального (столичного) округу Колумбія. Окрім того, США належать частина Віргінських островів (Американські Віргінські Острови) та Пуерто-Рико у Вест-Індії, Східне Самоа, Гуам, Північні Маріанські Острови та інші острови в Океанії. Столиця — місто Вашингтон.",
+            Image: "images/USA.png"
+        },
+        {
+            Name: "Туреччина",
+            Desc: "раїна, що лежить в Азії між Чорним і Середземним морями, межує на сході з Вірменією, Грузією й Іраном, на південному сході з Іраком і Сирією, на заході з Грецією й Егейським морем, на північному заході з Болгарією. На території країни, крім турків, проживають значною мірою курди (близько 12 млн осіб), вірмени, греки, араби, лази, аджарці, євреї, ассирійці, болгари, албанці, боснійці, хорвати. Член Міжнародного банку реконструкції й розвитку і Міжнародного валютного фонду (з 1947). Член Організації Чорноморського Економічного Співробітництва, НАТО, ООН, кандидат до Європейського Союзу. Сучасна Туреччина, чиїм попередником була 600-річня Османська імперія, виникла на політичній карті світу після Першої світової війни.",
+            Image: "images/tyrk.png"
+        },
+        {
+            Name: "Тайланд",
+            Desc: "країна в Південно-Східній Азії, розташована на півостровах Індокитай і Малакка, межує на сході з Лаосом і Камбоджею, півдні з Малайзією, на заході з М'янмою (раніше Бірма). Загальна протяжність берегової лінії близько 2400 км. Південне узбережжя країни омивається Сіамською затокою, південно-західне — Андаманським морем.",
+            Image: "images/tailand.png"
+        },
+        {
+            Name: "Франція",
+            Desc: "держава на заході Європи, республіка, що межує на північному сході з Бельгією, Люксембургом і Німеччиною, на сході з Німеччиною, Швейцарією, південному-заході з Іспанією й Андоррою, на південному-сході з Італією та Монако на півдні омивається Середземним морем, на заході — Атлантичним океаном.",
+            Image: "images/franc.png"
+        },
+        {
+            Name: "Індія",
+            Desc: "країна в Південній Азії. На північному заході межує з Пакистаном; на півночі — з КНР, Непалом і Бутаном; на сході — з М'янмою і Бангладеш. На півдні вузька Полкська протока і Манарська затока відділяють її від Шрі-Ланки. Протокою між островами Великий Нікобар і Суматра проходить морський кордон між Індією та Індонезією.",
+            Image: "images/india.png"
         }
     ];
 
-    School.remove({}, function(err) {
+    Country.remove({}, function(err) {
         if (err) {
             console.error(err);
         } else {
 
-            for (let i = 0; i < schools.length; i++) {
-                School.create(schools[i], function(err, School) {
+            for (let i = 0; i < countries.length; i++) {
+                Country.create(countries[i], function(err, country) {
                     if (err) console.error('Error: ' + err);
                     else console.log();
                 });
@@ -39,4 +75,13 @@ router.get("/setup-db", function(req, res) {
     });
 
 });
+/* GET prices page. */
+router.get('/prices', function(req, res, next) {
+    res.render('prices', { title: 'Prices' });
+});
+/* GET contacts page. */
+router.get('/contacts', function(req, res, next) {
+    res.render('contacts', { title: 'Contacts' });
+});
+
 module.exports = router;

@@ -1,0 +1,86 @@
+
+<form method="POST" class="form-horizontal" role="form">
+        <div class="form-group">
+            <legend>Register</legend>
+        </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-3" for="MsOrMr">Як до вас звертатись?</label>
+            <div class="col-md-3">
+                <select id="MsOrMr" class="form-control">
+                    <option value="1">Mrs</option>
+                    <option value="2">Ms</option>
+                    <option value="3">Sen</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="FSname" class="control-label col-md-3">Ім'я та Фамілія</label>
+            <div class="col-md-3">
+                <input type="text" name="FSname" id="FSname" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="comp" class="control-label col-md-3" col-md-2>Компанія (учбовий заклад)</label>
+            <div class="col-md-4">
+                <input type="text" name="comp" id="comp" class="form=control">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="Email" class="control-label col-md-3">Ваш e-mail</label>            
+            <div class="col-md-3">
+            <input type="email" class="form-control" id="Enamil">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="Posada" class="control-label col-md-3">Посада</label>
+            <div class="col-md-3">
+                <input type="text" name="Posada" id="Posada" class="form-control">
+            </div>
+        </div>
+
+         <div class="form-group">
+            <label for="City" class="control-label col-md-3">Місто проживання</label>
+            <div class="col-md-3">
+                <input type="text" name="City" id="City" class="form-control">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="radio col-md-3">
+            <label>
+                <input type="radio" name="OchZa" id="input${1/(\w+)/\u\1/g}" value="" checked="checked">
+                Очне
+            </label>
+            <label>
+                <input type="radio" name="OchZa" id="input${1/(\w+)/\u\1/g}" value="" checked="checked">
+                Заочне
+            </label>
+        </div>        
+</div>
+
+        <div class="form-group">
+            <label for="zvazok" class="control-label col-md-3">Як нам зробити конференцію більш корисною та цікавою</label>
+            <div class="col-md-3">
+                <textarea name="zvazok" id="zvazok" cols="5" rows="5" class="form-control"></textarea>                                    
+            </div>            
+        </div>
+
+        <div class="form-group">
+            <div class="checkbox col-md-3">
+                <label>
+                            <input type="checkbox" value="Доктор наук"> Доктор наук
+                </label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-sm-10 col-sm-offset-2">
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </div>
+</form>

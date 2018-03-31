@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var School = require('../models/school');
+var Country = require('../models/country');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -11,49 +11,49 @@ router.get('/', function(req, res, next) {
     });
 });
 
-router.get('/schools', function(req, res, next) {
-    School.find({}, function(err, schools) {
+router.get('/countries', function(req, res, next) {
+    Country.find({}, function(err, countries) {
         if (err) {
             console.error('Error: ' + err);
-            res.render('admin/School-res', {
+            res.render('admin/country-res', {
                 title: 'Error І',
                 message: err
             });
         } else {
-            res.render('admin/schools', {
+            res.render('admin/countries', {
                 layout: 'admin/layout',
-                title: 'Add School',
-                schools: schools
+                title: 'Add country',
+                countries: countries
             });
         }
     });
 });
 
-router.get('/schools-add', function(req, res, next) { //Додати країну    
-    res.render('admin/schools-add', {
+router.get('/countries-add', function(req, res, next) { //Додати країну    
+    res.render('admin/countries-add', {
         layout: 'admin/layout',
-        title: 'Add School'
+        title: 'Add country'
     });
 });
 
-router.post('/schools-add', function(req, res) { //Результат додавання країни
-    School.remove({ Name: req.body.SchoolName }, function(err) {
+router.post('/countries-add', function(req, res) { //Результат додавання країни
+    Country.remove({ Name: req.body.countryName }, function(err) {
         if (err) {
             console.error(err);
-            res.render('admin/School-res', { title: 'Error', message: err });
+            res.render('admin/country-res', { title: 'Error', message: err });
         } else {
-            School.create({
-                Name: req.body.SchoolName,
-                Desc: req.body.SchoolDescription,
+            Country.create({
+                Name: req.body.CountryName,
+                Desc: req.body.countryDescription,
                 Image: req.body.imageURL,
-            }, function(err, School) {
+            }, function(err, country) {
                 if (err) {
                     console.error('Error: ' + err);
-                    res.render('admin/School-res', { title: 'Error І', message: err });
+                    res.render('admin/country-res', { title: 'Error І', message: err });
                 } else
-                    res.render('admin/School-res', {
+                    res.render('admin/country-res', {
                         title: 'Super: ',
-                        message: 'School added to DB succesfully'
+                        message: 'Country added to DB succesfully'
                     });
             });
         }

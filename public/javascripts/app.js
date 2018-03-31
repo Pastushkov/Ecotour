@@ -1,14 +1,10 @@
 $().ready(function() {
-    $.getJSON("api/v1/schools", function(data) {
+    $.getJSON("api/v1/countries", function(data) {
         var str = '';
         $.each(data, function(key, val) {
-            str += `<div class="media">  
-            <div class="media-body">
-             <h4 class="media-heading">${val.Name}</h4> 
-             <p>${val.Adress}</p>
-             <p>${val.Contacts}</p>
-            </div>
-          </div>`;
+            str += `<div class="media"><div class="media-left"><img src="${val.Image}" alt="${val.Name}" class="media-object"\
+            style="width:200px; height:100px"></div><div class="media-body"><h4 class="media-heading">${val.Name}</h4>\
+            <p>${val.Desc}</p></div></div>`;
         });
         $("div.container").first().html(str);
         console.log(str);
