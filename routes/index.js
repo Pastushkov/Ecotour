@@ -1,27 +1,61 @@
 var express = require('express');
 var router = express.Router();
 var Country = require('../models/country');
+var nodemailer = require('nodemailer');
 /* GET home page. */
 router.get('/', function(req, res, next) {
     res.render('index', { title: 'Express' });
 });
-
 /* GET countries page. */
 router.get('/countries', function(req, res, next) {
     res.render('countries', { title: 'Ajax Demo', layout: 'layout1' });
-    // Country.find(function(err, countries) {
-    //     if (err) return console.err(err);
-    //     res.render('countries', { title: 'Країни', countries: countries });
+});
+/* GET contacts page. */
+router.get('/contacts', function(req, res, next) {
+    res.render('contacts', { title: 'Contacts' });
+});
+
+
+router.post('/contacts', function(req, res, next) {
+    //відправити листа
+    /*let ArrayTo = [
+        "dimaspas62@gmail.com",
+        "dimalesa62@gmail.com"
+    ];*/
+    var message = {
+        from: req.body.email,
+        to: "dimaspas62@gmail.com, dimalesa62@gmail.com",
+        subject: 'Message from Ecotour [' + req.body.name + ']',
+        text: req.body.message,
+        html: '<p>' + req.body.message + '</p>'
+    };
+    if (req.body.human === "5") {
+        let transporter = nodemailer.createTransport({
+            tls: {
+                rejectUnauthorized: false
+            },
+            service: 'gmail',
+            auth: {
+                user: "dimaZora62@gmail.com",
+                pass: "Password!"
+            }
+        });
+
+        // send mail with defined transport object
+        transporter.sendMail(message, (error, info) => {
+            if (error) {
+                return console.log(error);
+            }
+            console.log(info);
+            res.render('contacts-res', { title: 'Contacts:', message: "Лист віправлено!" })
+        });
+
+    } else {
+        res.render('contacts-res', { title: 'Contacts:', message: "Ви робот?!" });
+    }
 
 });
 
-/* Country.find()
-     .then(function(countries) {
-         res.render('countries', { title: 'Express2', countries: countries });
-     })
-     .catch(next)
-     .error(console.error);*/
-//});
 
 router.get("/setup-db", function(req, res) {
 
@@ -79,9 +113,6 @@ router.get("/setup-db", function(req, res) {
 router.get('/prices', function(req, res, next) {
     res.render('prices', { title: 'Prices' });
 });
-/* GET contacts page. */
-router.get('/contacts', function(req, res, next) {
-    res.render('contacts', { title: 'Contacts' });
-});
+
 
 module.exports = router;

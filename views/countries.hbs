@@ -1,13 +1,16 @@
 {{title}}
 
 {{#each countries}}
-<div class="media">
+ <div class="media col-md-6">
   <div class="media-left">
     <img src="{{Image}}" alt="{{Name}}" class="media-object" style="width:200px; height:100px">
   </div>
   <div class="media-body">
    <h4 class="media-heading">{{Name}}</h4> 
-   <p>{{Desc}}</p>
+    <p>{{Desc}}</p>   
   </div>
-</div>
+</div> 
+
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.23/angularresource.min.js"></script>
 {{/each}}
